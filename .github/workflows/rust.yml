@@ -21,11 +21,17 @@ jobs:
     - name: Run tests
       run: cargo test --verbose
     - name: Compute Code Coverage
-      run: cargo llvm-cov
+      run: |
+        rustup component add llvm-tools-preview
+        cargo llvm-cov
     - name: Checking Linting
-      run: cargo clippy
+      run: |
+        rustup component add clippy
+        cargo clippy
     - name: Checking Foramtting
-      run: cargo fmt -- --check
+      run: |
+        rustup component add rustfmt
+        cargo fmt -- --check
     - name: Conduct audit
       run: cargo audit
 
